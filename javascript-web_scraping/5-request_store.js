@@ -1,14 +1,20 @@
 #!/usr/bin/node
 const fs = require('fs');
 const request = require('request');
-const url = process.argv[2];
-const fpath = process.argv[3];
 
-function write_file (content) {
-  fs.writeFile(fpath, content, 'utf8', (err) => {
+const url = process.argv[2];
+const filePath = process.argv[3];
+
+request(url, (error, response, body) => {
+  if (error) {
+    console.error('Error:', error);
+    return;
+  }
+  fs.writeFile(filePath, body, 'utf8', (err) => {
     if (err) {
-      return console.error(err);
+      console.error('Error writing file:', err);
+      return;
     }
-    console.log('Content written to ${fpath}');
+    console.log(`Content written to ${filePath}`);
   });
-}
+});
