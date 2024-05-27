@@ -16,4 +16,21 @@ function countStudents(path) {
 
         const totalStudents = students.length;
         console.log(`Number of students: ${totalStudents}`);
+
+        const fieldSummary = students.reduce((acc, { firstName, field }) => {
+            if (!acc[field]) {
+                acc[field] = [];
+            }
+            acc[field].push(firstName);
+            return acc;
+        }, {});
+
+        Object.entries(fieldSummary).forEach(([field, names]) => {
+            console.log(`Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`);
+        });
+    } catch (error) {
+        throw new Error('Cannot load the database');
+    }
 }
+
+module.exports = countStudents;
