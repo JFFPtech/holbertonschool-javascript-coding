@@ -7,7 +7,7 @@ const port = 1245;
 app.use('/', routes);
 
 app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+    console.log(`Server listening on http://localhost:${port}`);
 });
 
 export default app;

@@ -3,7 +3,7 @@ import { readDatabase } from '../utils.js';
 class StudentsController {
     static async getAllStudents(req, res) {
         try {
-            const students = await readDatabase('Node_JS_basic/database.csv');
+            const students = await readDatabase('database.csv');
             let response = 'This is the list of our students\n';
             Object.keys(students).sort().forEach((field) => {
                 response += `Number of students in ${field}: ${students[field].length}. List: ${students[field].join(', ')}\n`;
@@ -21,7 +21,7 @@ class StudentsController {
         }
 
         try {
-            const students = await readDatabase('Node_JS_basic/database.csv');
+            const students = await readDatabase('database.csv');
             if (students[major]) {
                 return res.status(200).send(`List: ${students[major].join(', ')}`);
             } else {
