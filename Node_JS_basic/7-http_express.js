@@ -37,3 +37,22 @@ async function readStudents(path) {
     throw new Error('Cannot load the database');
   }
 }
+
+app.get('/', (req, res) => {
+  res.send('Hello Holberton School!');
+});
+
+app.get('/students', async (req, res) => {
+  try {
+    const data = await readStudents(databasePath);
+    res.send(`This is the list of our students\n${data}`);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+app.listen(1245, () => {
+  console.log('Express server started on port 1245');
+});
+
+module.exports = app;
